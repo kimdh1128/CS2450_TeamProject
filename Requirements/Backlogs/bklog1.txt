@@ -1,1 +1,14 @@
-
+  TASK TO BE DONE:
+      Meeting Logs
+      Backlogs and sprints (Backlog is basically this document, It's a list of tasks to be completed, I'd like help or ideas on how to better orgnize these tasks.)
+      Compare SCRUM and another process (I Am researching KANBAN - Bryan)
+        3 reasons for and against each model
+      Use Case Diagram with 10-15 use cases
+      Running Software Prototype
+      Test Cases 10-15 which cover ALL Use Cases
+      ReadMe Document describing use
+IN-PROGRESS:
+      Backlog1 and organization of tasks
+      Reasearch into other deliverables by team members
+ 
+DONE:
