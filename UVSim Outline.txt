@@ -21,7 +21,7 @@ Class UVSim
 		int currentAddress		// Keeps track of the address the instruction should be entered into memory.
 
 	Functions:
-		UVSim()					// CONSTRUCTOR: Initializes all the classes required. Must be called in main after UVSim is created. Sends the member variable Class Memory to the Accumulator on creation.
+		UVSim()					// CONSTRUCTOR: Initializes all the classes required. Sends the member variable Class Memory to the Accumulator on creation.
 		void StartProgram()		// Displays the starting information. Loops collecting the user's program until -99999 is entered. With each loop it calls StoreValue() in class Memory and stores the full word into the address currentAddress has.
 								// It then increments currentAddress. Once -99999 is entered, it displays "Program loading completed", then it calls RunProgram() from the Accumulator class. 
 								// Once RunProgam is done and returns here, display "Simpletron execution terminated" and calls DisplayAccumulator() and DisplayMemory(). The UVSim exits back to main from here.
