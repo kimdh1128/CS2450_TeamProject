@@ -8,11 +8,10 @@ Bryan Edman
 int main()
 {
 	UVSim sim; 				// Creates the UVSim class, automatically calls UVSim() to initialize all the classes.
-	sim.StartProgram() 		// Starts the program
+	sim.StartProgram() 			// Starts the program
 
 	return 0;
 }
-
 
 Class UVSim
 	Members:
@@ -21,53 +20,69 @@ Class UVSim
 		int currentAddress		// Keeps track of the address the instruction should be entered into memory.
 
 	Functions:
-		UVSim()					// CONSTRUCTOR: Initializes all the classes required. Sends the member variable Class Memory to the Accumulator on creation.
-		void StartProgram()		// Displays the starting information. Loops collecting the user's program until -99999 is entered. With each loop it calls StoreValue() in class Memory and stores the full word into the address currentAddress has.
-								// It then increments currentAddress. Once -99999 is entered, it displays "Program loading completed", then it calls RunProgram() from the Accumulator class. 
-								// Once RunProgam is done and returns here, display "Simpletron execution terminated" and calls DisplayAccumulator() and DisplayMemory(). The UVSim exits back to main from here.
+		UVSim()				// CONSTRUCTOR: Initializes all the classes required. Sends the member variable Class Memory to the Accumulator on creation.
 		
+		void StartProgram()		// Displays the starting information. Loops collecting the user's program until -99999 is entered. 
+						// With each loop it calls StoreValue() in class Memory and stores the full word into the address currentAddress has.
+						// It then increments currentAddress. Once -99999 is entered, it displays "Program loading completed" 
+						// Then it calls RunProgram() from the Accumulator class. 
+						// Once RunProgam is done and returns here, display "Simpletron execution terminated" and calls DisplayAccumulator()
+						// and DisplayMemory(). The UVSim exits back to main from here.
 
 
 Class Memory
 	Members:
-		private memory[100] = {};						// Private so nothing can mess with it. All required changes are done through this class's functions. 
-														// Could also be an array of arrays. (10x10) to make displaying it easier, but calling addresses more difficult.
+		private memory[100] = {};			// Private so nothing can mess with it. All required changes are done through this class's functions. 
+								// Could also be an array of arrays. (10x10) to make displaying it easier, but calling addresses more difficult.
 
 	Functions:
-		void StoreValue(int address, int value)			// Stores the value into the required memory address
-		int LoadFromMemory(int address)					// Returns a value at a certain memory address
+		void StoreValue(int address, int value)		// Stores the value into the required memory address
+		
+		int LoadFromMemory(int address)			// Returns a value at a certain memory address
 
-		void DisplayMemory()							// Called by UVSim. Displays the memory contents in the way shown by the test case
+		void DisplayMemory()				// Called by UVSim. Displays the memory contents in the way shown by the test case
 
 
 Class Accumulator
 	Members:
-		int register;						// Value held by the register
+		int register;					// Value held by the register
 		int instructionCounter;				// Number of instructions completed
 		int instructionRegister; 			// Holds the entire instruction (word) as entered by the user
-		int operationCode; 					// Holds the information that tells the UVSim what to do
-		int operand; 						// Holds the information the user entered that they want manipulated
-		int instructionMemoryAdd = 0;		// Holds the next address to be used by LoadInstuction function. Starts at 0 since that's where the program will start in memory.
-		Class Memory;						// This will need to be a pointer to the memory class created on the startup of the program so the Accumulator can manipulte the data in it
+		int operationCode; 				// Holds the information that tells the UVSim what to do
+		int operand; 					// Holds the information the user entered that they want manipulated
+		int instructionMemoryAdd = 0;			// Holds the next address to be used by LoadInstuction function. 
+								// Starts at 0 since that's where the program will start in memory.
+		Class Memory;					// This will need to be a pointer to the memory class created on the startup of the program so the 
+								// Accumulator can manipulte the data in it
 
 	Functions:
-		Accumulator(class *Memory)			// CONSTRUCTOR. Takes a pointer to class memory from UVSim and stores it in the Class Memory member variable.
+		Accumulator(class *Memory)	// CONSTRUCTOR. Takes a pointer to class memory from UVSim and stores it in the Class Memory member variable.
 
-		void RunProgram()					// Beginning it displays "Progam execution beings". Starts at 00 until the end of the program (When it reaches 43 instruction). 
-											// First calls LoadInstruction, then uses a switch statement to call the functions required. 
-											
-		void LoadInstruction()				// Calls LoadFromMemory in class Memory using the sent address. It stores this value in instructionRegister and fills operationCode and operand variables
-
-		void ReadToMemory()					// Operation Code: 10      Asks for input from the user. Then it calls the Memory class's function of StoreValue(). (The memory address will the the operationCode in the Accumulator's member)
-		void WriteToScreen()				// Operation Code: 11      Displays the memory address and the contents of that memory address to the screen by calling LoadFromMemory() in the class Memory
-		void LoadFromMemory()				// Operation Code: 20      Calls LoadFromMemory() in Class Memory. It takes the returned value and stores it in register within this class Accumulator
-		void StoreToMemory()				// Operation Code: 21	   Calls StoreValue() in Class Memory which handles everything needed.
-		void Add()							// Operation Code: 30	   Calls LoadFromMemory() in class Memory. Then takes that value and the value in the register and adds them. This new value OVERWRITES the register variable.
-		void Subtract()						// Operation Code: 31	   Calls LoadFromMemory() in class Memory. Then takes that value and the value in the register and subtracts them. This new value OVERWRITES the register variable.
-		void Divide()						// Operation Code: 32	   Calls LoadFromMemory() in class Memory. Order here is important. Divide the value in the accumulator from the value from the memory. This new value OVERWRITES the register variable.
-		void Multiply()						// Operation Code: 33	   Calls LoadFromMemory() in class Memory. Then takes that value and the value in the register and multiplies them. This new value OVERWRITES the register variable.
-		void Branch()						// Operation Code: 40	   Sets the variable instructionMemoryAdd to what the variable operand holds. (This will jump the program on the next loop of RunProgam())
-		void BranchNeg()					// Operation Code: 41      First checks the register. If it is negative, sets the variable instructionMemoryAdd to what the variable operand holds. (This will jump the program on the next loop of RunProgam())
-		void BranchZero()					// Operation Code: 42	   First checks the register. If it is zero, sets the variable instructionMemoryAdd to what the variable operand holds. (This will jump the program on the next loop of RunProgam()) 
-
-		void DisplayAccumulator()			// This will be called by UVSim. It should display what the test case shows. Displays the register, instructionCounter, instructionRegister, operationCode and operand variables. 
+		void RunProgram()		// Beginning it displays "Progam execution beings". Starts at 00 until the end of the program (When it reaches 43 instruction). 
+						// First calls LoadInstruction, then uses a switch statement to call the functions required.					
+		void LoadInstruction()		// Calls LoadFromMemory in class Memory using the sent address. 
+						// It stores this value in instructionRegister and fills operationCode and operand variables
+		void ReadToMemory()		// Operation Code: 10      Asks for input from the user. Then it calls the Memory class's function of StoreValue(). 
+						// (The memory address will the the operationCode in the Accumulator's member)
+		void WriteToScreen()		// Operation Code: 11      Displays the memory address and the contents of that memory address to the screen by 
+						// calling LoadFromMemory() in the class Memory
+		void LoadFromMemory()		// Operation Code: 20      Calls LoadFromMemory() in Class Memory. It takes the returned value and stores it in 
+						// register within this class Accumulator
+		void StoreToMemory()		// Operation Code: 21	   Calls StoreValue() in Class Memory which handles everything needed.
+		
+		void Add()			// Operation Code: 30	   Calls LoadFromMemory() in class Memory. 
+						// Then takes that value and the value in the register and adds them. This new value OVERWRITES the register variable.
+		void Subtract()			// Operation Code: 31	   Calls LoadFromMemory() in class Memory. Then takes that value and the 
+						// value in the register and subtracts them. This new value OVERWRITES the register variable.
+		void Divide()			// Operation Code: 32	   Calls LoadFromMemory() in class Memory. Order here is important. 
+						// Divide the value in the accumulator from the value from the memory. This new value OVERWRITES the register variable.
+		void Multiply()			// Operation Code: 33	   Calls LoadFromMemory() in class Memory. 
+						// Then takes that value and the value in the register and multiplies them. This new value OVERWRITES the register variable.
+		void Branch()			// Operation Code: 40	   Sets the variable instructionMemoryAdd to what the variable operand holds. 
+						// (This will jump the program on the next loop of RunProgam())
+		void BranchNeg()		// Operation Code: 41      First checks the register. If it is negative, sets the variable instructionMemoryAdd to 
+						// what the variable operand holds. (This will jump the program on the next loop of RunProgam())
+		void BranchZero()		// Operation Code: 42	   First checks the register. If it is zero, sets the variable instructionMemoryAdd to 
+						// what the variable operand holds. (This will jump the program on the next loop of RunProgam()) 
+		void DisplayAccumulator()	// This will be called by UVSim. It should display what the test case shows. 
+						// Displays the register, instructionCounter, instructionRegister, operationCode and operand variables. 
