@@ -26,5 +26,7 @@ void UVSim::StartProgram()
 		mem.StoreValue(currentAdress,  FromString<int>(usrInput));
 		currentAdress++;
 	}
+	cout << "Program loaded. . ." << endl;
+	acmltr.RunProgram();
 
 }
