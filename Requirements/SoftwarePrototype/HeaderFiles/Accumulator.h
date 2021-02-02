@@ -4,5 +4,5 @@ class Accumulator
 {
 public:
 	Accumulator();
+	void RunProgram();
 };
-
