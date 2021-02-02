@@ -4,3 +4,7 @@ Accumulator::Accumulator()
 {
 
 }
+
+void Accumulator::RunProgram()
+{
+}
