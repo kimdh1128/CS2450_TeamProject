@@ -23,7 +23,7 @@ void UVSim::StartProgram()
 	{
 		cout << std::setw(2) << setfill('0') << currentAdress << " :";
 		cin >> usrInput;
-		mem.StoreValue(currentAdress, usrInput);
+		mem.StoreValue(currentAdress,  FromString<int>(usrInput));
 		currentAdress++;
 	}
 
