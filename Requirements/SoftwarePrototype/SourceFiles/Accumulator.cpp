@@ -1,8 +1,12 @@
 #include "Accumulator.h"
 
 Accumulator::Accumulator(Memory* mem)
+	:mMemory(mem)
 {
-	mMemory = mem;
+}
+
+Accumulator::~Accumulator()
+{
 }
 
 void Accumulator::RunProgram()
