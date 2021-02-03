@@ -19,6 +19,7 @@ public:
 
 	// CONSTRUCTOR. Takes a pointer to class memory from UVSim and stores it in the Class Memory member variable.
 	Accumulator(class Memory *mem);
+	~Accumulator();
 
 	// Beginning it displays "Progam execution beings". Starts at 00 until the end of the program (When it reaches 43 instruction). 
 	// First calls LoadInstruction, then uses a switch statement to call the functions required.
