@@ -117,33 +117,98 @@ void Accumulator::StoreToMemory()
 
 void Accumulator::Add()
 {
+	mRegister += mMemory->LoadFromMemory(mOperand);
+	mIntructionCounter++;
+	
+	return;
 }
 
 void Accumulator::Subtract()
 {
+	mRegister -= mMemory->LoadFromMemory(mOperand);
+	mInstructionCounter++;
+	
+	return;
 }
 
 void Accumulator::Divide()
 {
+	mRegister /= mMemory->LoadFromMemory(mOperand);
+	mInstructionCounter++;
+	
+	return;
 }
 
 void Accumulator::Multiply()
 {
+	mRegister *= mMemory->LoadFromMemory(mOperand);
+	mInsturctionCounter++;
+	
+	return;
 }
 
 void Accumulator::Branch()
 {
+	 
 }
 
 void Accumulator::BranchNeg()
 {
+	if (mRegister < 0) {
+		
+	}
 }
 
 void Accumulator::BranchZero()
 {
+	if (mRegister == 0) {
+		
+	}
 }
 
 void Accumulator::DisplayAccumulator()
 {
+	cout << "REGISTER: " << endl;
+	cout << "Accumulator:        \t";
+	if (mRegister < 10) {
+		cout << "000";
+	}
+	else if (mRegister < 100 && mRegister > 9) {
+		cout << "00";
+	}
+	else if (mRegister <= 999 & mRegister > 99) {
+		cout << "0";
+	}
+	cout << mRegister << endl;
+	
+	cout << "InsturctionCounter:  \t";
+	if (mInstructionCounter < 10) {
+		cout << "0";
+	}
+	cout << mInsturctionCounter << endl;
+	
+	cout << "InstructionRegister:\t"; 
+	if (mInsturctionRegister < 10) {
+		cout << "000";
+	}
+	else if (mInstructionRegister < 100 && mInstructionRegister > 9) {
+		cout << "00";
+	}
+	else if (mInstructionRegister <= 999 && mInsturctionRegister > 99) {
+		cout << "0";
+	}
+	cout << mInsturctionRegister << endl;
+	
+	cout << "OperationCode: \t";
+	if (mOperationCode < 10) {
+		cout << "0";
+	}
+	cout << mOperationCode << endl;
+	
+	cout << "Operand:  \t";
+	if (mOperand < 10) {
+		cout << "0";
+	}
+	cout << mOperand << endl;
 }
 
