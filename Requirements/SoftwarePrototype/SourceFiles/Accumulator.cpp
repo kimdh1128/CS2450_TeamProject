@@ -117,6 +117,8 @@ void Accumulator::StoreToMemory()
 
 void Accumulator::Add()
 {
+	int num = mMemory->LoadFromMemory(mOperand);
+	
 }
 
 void Accumulator::Subtract()
